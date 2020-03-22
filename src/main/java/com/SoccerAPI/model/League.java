@@ -21,6 +21,7 @@ public class League {
 	
 	private String name;
 	private String country;
+
 	
 	@OneToMany(mappedBy = "league", targetEntity = Club.class, fetch = FetchType.EAGER)
 	Set<Club> clubSet = new HashSet<>();
