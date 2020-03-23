@@ -3,7 +3,6 @@ package com.SoccerAPI.service;
 import java.util.List;
 import java.util.Optional;
 
-import org.aspectj.bridge.MessageUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -34,7 +33,7 @@ public class LeagueService {
 	
 	public void addLeague(League league) {
 		boolean leagueFound = repo.findAll().stream().
-				anyMatch(repoLeague -> repoLeague.getId() == league.getId());
+				anyMatch(c -> c.getId() == league.getId());
 		
 		if (!leagueFound) {
 			repo.save(league);

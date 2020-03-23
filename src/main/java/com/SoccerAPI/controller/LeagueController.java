@@ -21,34 +21,34 @@ public class LeagueController {
 	
 	
 	@Autowired
-	LeagueRepository leagueRepository;
+	LeagueRepository repo;
 	
 	@Autowired
-	LeagueService leagueService;
+	LeagueService service;
 	
 	@GetMapping("/leagues")
 	public List<League> getAllLeagues() {
-		return leagueService.getAllLeagues();
+		return service.getAllLeagues();
 	}
 	
 	@GetMapping("/leagues/{id}")
 	public ResponseEntity<Object> getLeagueById(@PathVariable Long id) {
-		return leagueService.getLeagueById(id);
+		return service.getLeagueById(id);
 	}
 	
 	@PostMapping("/leagues/addleague") 
 	public void addLeague(@RequestBody League league) {
-		leagueService.addLeague(league);
+		service.addLeague(league);
 	}
 	
 	@PutMapping("/leagues/updateleague/{id}")
 	public void updateLeague(@RequestBody League league, @PathVariable Long id) {
-		leagueService.updateLeague(league, id);
+		service.updateLeague(league, id);
 	}
 	
 	@DeleteMapping("/leagues/deleteleague/{id}")
 	public void deleteLeague(@PathVariable Long id) {
-		leagueService.deleteLeague(id);
+		service.deleteLeague(id);
 	}
 
 }
