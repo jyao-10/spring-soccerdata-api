@@ -31,24 +31,27 @@ public class LeagueController {
 		return service.getAllLeagues();
 	}
 	
-	@GetMapping("/leagues/{id}")
-	public ResponseEntity<Object> getLeagueById(@PathVariable Long id) {
-		return service.getLeagueById(id);
+	@GetMapping("/leagues/{league_id}")
+	public ResponseEntity<Object> getLeagueById(@PathVariable Long league_id) {
+		return service.getLeagueById(league_id);
 	}
+	
 	
 	@PostMapping("/leagues/addleague") 
 	public void addLeague(@RequestBody League league) {
 		service.addLeague(league);
 	}
 	
-	@PutMapping("/leagues/updateleague/{id}")
-	public void updateLeague(@RequestBody League league, @PathVariable Long id) {
-		service.updateLeague(league, id);
+	@PutMapping("/leagues/updateleague/{league_id}")
+	public void updateLeague(@RequestBody League league, @PathVariable Long league_id) {
+		service.updateLeague(league, league_id);
 	}
 	
-	@DeleteMapping("/leagues/deleteleague/{id}")
-	public void deleteLeague(@PathVariable Long id) {
-		service.deleteLeague(id);
+	@DeleteMapping("/leagues/deleteleague/{league_id}")
+	public void deleteLeague(@PathVariable Long league_id) {
+		service.deleteLeague(league_id);
 	}
+	
+	
 
 }

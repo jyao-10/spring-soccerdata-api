@@ -31,9 +31,9 @@ public class ClubController {
 		return service.getAllClubs();
 	}
 	
-	@GetMapping("/clubs/{id}")
-	public ResponseEntity<Object> getClubById(@PathVariable Long id) {
-		return service.getClubById(id);
+	@GetMapping("/clubs/{club_id}")
+	public ResponseEntity<Object> getClubById(@PathVariable Long club_id) {
+		return service.getClubById(club_id);
 	}
 	
 	@PostMapping("/clubs/addclub") 
@@ -41,14 +41,14 @@ public class ClubController {
 		service.addClub(club);
 	}
 	
-	@PutMapping("/clubs/updateclub/{id}")
-	public void updateLeague(@RequestBody Club club, @PathVariable Long id) {
-		service.updateClub(club, id);
+	@PutMapping("/clubs/updateclub/{club_id}")
+	public void updateLeague(@RequestBody Club club, @PathVariable Long club_id) {
+		service.updateClub(club, club_id);
 	}
 	
-	@DeleteMapping("/clubs/deleteclub/{id}")
-	public void deleteLeague(@PathVariable Long id) {
-		service.deleteClub(id);
+	@DeleteMapping("/clubs/deleteclub/{club_id}")
+	public void deleteLeague(@PathVariable Long club_id) {
+		service.deleteClub(club_id);
 	}
 	
 	
