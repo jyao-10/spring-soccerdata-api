@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.SoccerAPI.exception.ResourceNotFoundException;
 import com.SoccerAPI.model.League;
 import com.SoccerAPI.repository.LeagueRepository;
 
@@ -27,7 +28,7 @@ public class LeagueService {
 		if (optionalLeague.isPresent()) {
 			return ResponseEntity.ok(optionalLeague.get());
 		} else {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("League Id: " + id + " not found");
+			throw new ResourceNotFoundException("League Id: " + id + " not found");
 		}
 	}
 	
@@ -48,7 +49,7 @@ public class LeagueService {
 			repo.save(league);
 			return ResponseEntity.ok(league);
 		} else {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("League ID: " + id + " to update not found");
+			throw new ResourceNotFoundException("League Id: " + id + " to update not found");
 		}
 		
 	}

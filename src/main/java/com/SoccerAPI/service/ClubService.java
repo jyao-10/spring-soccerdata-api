@@ -4,10 +4,10 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.SoccerAPI.exception.ResourceNotFoundException;
 import com.SoccerAPI.model.Club;
 import com.SoccerAPI.repository.ClubRepository;
 
@@ -29,7 +29,7 @@ public class ClubService {
 		if (optionalClub.isPresent()) {
 			return ResponseEntity.ok(optionalClub.get());
 		} else {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Club Id: " + id + " not found");
+			throw new ResourceNotFoundException("Club Id: " + id + " not found");
 		}
 	}
 	
@@ -50,7 +50,7 @@ public class ClubService {
 			repo.save(club);
 			return ResponseEntity.ok(club);
 		} else {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Club ID: " + id + " to update not found");
+			throw new ResourceNotFoundException("Club Id: " + id + " to update not found");
 		}
 		
 	}
