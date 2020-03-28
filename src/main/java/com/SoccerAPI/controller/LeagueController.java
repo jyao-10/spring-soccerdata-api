@@ -37,17 +37,17 @@ public class LeagueController {
 	}
 	
 	
-	@PostMapping("/leagues/addleague") 
+	@PostMapping("/leagues") 
 	public void addLeague(@RequestBody League league) {
 		service.addLeague(league);
 	}
 	
-	@PutMapping("/leagues/updateleague/{league_id}")
+	@PutMapping("/leagues/{league_id}")
 	public void updateLeague(@RequestBody League league, @PathVariable Long league_id) {
 		service.updateLeague(league, league_id);
 	}
 	
-	@DeleteMapping("/leagues/deleteleague/{league_id}")
+	@DeleteMapping("/leagues/{league_id}")
 	public void deleteLeague(@PathVariable Long league_id) {
 		service.deleteLeague(league_id);
 	}

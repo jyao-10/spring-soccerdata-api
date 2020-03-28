@@ -36,17 +36,17 @@ public class ClubController {
 		return service.getClubById(club_id);
 	}
 	
-	@PostMapping("/clubs/addclub") 
+	@PostMapping("/clubs") 
 	public void addClub(@RequestBody Club club) {
 		service.addClub(club);
 	}
 	
-	@PutMapping("/clubs/updateclub/{club_id}")
+	@PutMapping("/clubs/{club_id}")
 	public void updateLeague(@RequestBody Club club, @PathVariable Long club_id) {
 		service.updateClub(club, club_id);
 	}
 	
-	@DeleteMapping("/clubs/deleteclub/{club_id}")
+	@DeleteMapping("/clubs/club_id}")
 	public void deleteLeague(@PathVariable Long club_id) {
 		service.deleteClub(club_id);
 	}
