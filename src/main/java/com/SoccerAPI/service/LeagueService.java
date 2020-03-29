@@ -4,10 +4,10 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.SoccerAPI.exception.NoContentException;
 import com.SoccerAPI.exception.ResourceNotFoundException;
 import com.SoccerAPI.model.League;
 import com.SoccerAPI.repository.LeagueRepository;
@@ -28,7 +28,7 @@ public class LeagueService {
 		if (optionalLeague.isPresent()) {
 			return ResponseEntity.ok(optionalLeague.get());
 		} else {
-			throw new ResourceNotFoundException("League Id: " + id + " not found");
+			throw new NoContentException("League id: " + id + " not found");
 		}
 	}
 	
@@ -49,7 +49,7 @@ public class LeagueService {
 			repo.save(league);
 			return ResponseEntity.ok(league);
 		} else {
-			throw new ResourceNotFoundException("League Id: " + id + " to update not found");
+			throw new ResourceNotFoundException("League id: " + id + " to update not found");
 		}
 		
 	}
