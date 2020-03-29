@@ -46,7 +46,7 @@ public class ClubController {
 		service.updateClub(club, club_id);
 	}
 	
-	@DeleteMapping("/clubs/club_id}")
+	@DeleteMapping("/clubs/{club_id}")
 	public void deleteLeague(@PathVariable Long club_id) {
 		service.deleteClub(club_id);
 	}
