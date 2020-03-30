@@ -9,53 +9,79 @@ import org.springframework.stereotype.Service;
 
 import com.SoccerAPI.exception.NoContentException;
 import com.SoccerAPI.exception.ResourceNotFoundException;
+import com.SoccerAPI.model.Club;
 import com.SoccerAPI.model.League;
+import com.SoccerAPI.repository.ClubRepository;
 import com.SoccerAPI.repository.LeagueRepository;
 
 @Service
 public class LeagueService {
-	
+
 	@Autowired
-	LeagueRepository repo;
-	
+	LeagueRepository leagueRepo;
+
+	@Autowired
+	ClubRepository clubRepo;
+
 	public List<League> getAllLeagues() {
-		return repo.findAll();
+		return leagueRepo.findAll();
 	}
-	
+
 	public ResponseEntity<Object> getLeagueById(Long id) {
-		Optional<League> optionalLeague = repo.findById(id);
-		
+		Optional<League> optionalLeague = leagueRepo.findById(id);
+
 		if (optionalLeague.isPresent()) {
 			return ResponseEntity.ok(optionalLeague.get());
 		} else {
 			throw new NoContentException("League id: " + id + " not found");
 		}
 	}
-	
+
 	public void addLeague(League league) {
-		boolean leagueFound = repo.findAll().stream().
+		boolean leagueFound = leagueRepo.findAll().stream().
 				anyMatch(c -> c.getId() == league.getId());
-		
+
 		if (!leagueFound) {
-			repo.save(league);
+			leagueRepo.save(league);
 		}
 	}
-	
+
 	public ResponseEntity<Object> updateLeague(League league, Long id) {
-		Optional<League> optionalLeague = repo.findById(id);
-		
+		Optional<League> optionalLeague = leagueRepo.findById(id);
+
 		if (optionalLeague.isPresent()) {
 			league.setId(id);
-			repo.save(league);
+			leagueRepo.save(league);
 			return ResponseEntity.ok(league);
 		} else {
 			throw new ResourceNotFoundException("League id: " + id + " to update not found");
 		}
-		
+
 	}
-	
+
 	public void deleteLeague(Long id) {
-		repo.deleteById(id);
+		leagueRepo.deleteById(id);
 	}
+
+
+	public ResponseEntity<Object> getLeaguesByClub(Long club_id) {
+		Optional<Club> optionalClub = clubRepo.findById(club_id);
+
+		if (optionalClub.isPresent()) {
+			return ResponseEntity.ok(optionalClub.get().getLeagues_in());
+		} else {
+			throw new ResourceNotFoundException("Club id: " + club_id + " not found");
+		}
+
+	}
+
+	public List<League> getLeaguesBySearch(String str) {
+		if (!leagueRepo.findByName(str).isEmpty()) {
+			return leagueRepo.findByName(str);
+		} else {
+			return leagueRepo.findByCountry(str);
+		}
+	}
+
 
 }

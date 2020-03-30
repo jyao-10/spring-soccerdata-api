@@ -16,6 +16,7 @@ import com.SoccerAPI.model.League;
 import com.SoccerAPI.repository.LeagueRepository;
 import com.SoccerAPI.service.LeagueService;
 
+
 @RestController
 public class LeagueController {
 	
@@ -31,7 +32,7 @@ public class LeagueController {
 		return service.getAllLeagues();
 	}
 	
-	@GetMapping("/leagues/{league_id}")
+	@GetMapping("/leagues/league/{league_id}")
 	public ResponseEntity<Object> getLeagueById(@PathVariable Long league_id) {
 		return service.getLeagueById(league_id);
 	}
@@ -50,6 +51,17 @@ public class LeagueController {
 	@DeleteMapping("/leagues/{league_id}")
 	public void deleteLeague(@PathVariable Long league_id) {
 		service.deleteLeague(league_id);
+	}
+	
+	
+	@GetMapping("/leagues/club/{club_id}")
+	public ResponseEntity<Object> getLeaguesByClub(@PathVariable Long club_id) {
+		return service.getLeaguesByClub(club_id);
+	}
+	
+	@GetMapping("/leagues/search/{search_str}")
+	public List<League> getLeaguesBySearch(@PathVariable String search_str) { 
+		return service.getLeaguesBySearch(search_str);
 	}
 	
 	
