@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import com.SoccerAPI.exception.NoContentException;
 import com.SoccerAPI.exception.ResourceNotFoundException;
 import com.SoccerAPI.model.Club;
 import com.SoccerAPI.repository.ClubRepository;
@@ -30,7 +29,7 @@ public class ClubService {
 		if (optionalClub.isPresent()) {
 			return ResponseEntity.ok(optionalClub.get());
 		} else {
-			throw new NoContentException("Club id: " + id + " not found");
+			throw new ResourceNotFoundException("Club id: " + id + " not found");
 		}
 	}
 	
@@ -59,9 +58,6 @@ public class ClubService {
 	public void deleteClub(Long id) {
 		repo.deleteById(id);
 	}
-	
-	
-	
 	
 	
 	

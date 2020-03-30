@@ -36,7 +36,7 @@ public class LeagueController {
 	public ResponseEntity<Object> getLeagueById(@PathVariable Long league_id) {
 		return service.getLeagueById(league_id);
 	}
-	
+
 	
 	@PostMapping("/leagues") 
 	public void addLeague(@RequestBody League league) {

@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import com.SoccerAPI.exception.NoContentException;
 import com.SoccerAPI.exception.ResourceNotFoundException;
 import com.SoccerAPI.model.Club;
 import com.SoccerAPI.model.League;
@@ -33,9 +32,10 @@ public class LeagueService {
 		if (optionalLeague.isPresent()) {
 			return ResponseEntity.ok(optionalLeague.get());
 		} else {
-			throw new NoContentException("League id: " + id + " not found");
+			throw new ResourceNotFoundException("League id: " + id + " not found");
 		}
 	}
+	
 
 	public void addLeague(League league) {
 		boolean leagueFound = leagueRepo.findAll().stream().
