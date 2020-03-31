@@ -64,6 +64,9 @@ public class LeagueController {
 		return service.getLeaguesBySearch(search_str);
 	}
 	
-	
+	@GetMapping("/leagues/type/{league_type}")
+	public List<League> getLeaguesByType(@PathVariable String league_type) {
+		return service.getLeaguesByType(league_type);
+	}
 
 }

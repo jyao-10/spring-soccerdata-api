@@ -1,17 +1,21 @@
 package com.SoccerAPI.model;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "clubs")
 public class Club {
 
 	@Id
@@ -37,10 +41,9 @@ public class Club {
 	private String manager_name;
 	private String manager_id;
 	
+	@ManyToMany(mappedBy = "clubs", targetEntity = League.class, fetch = FetchType.LAZY)
+	private Set<League> leagues = new HashSet<>();
 	
-	@ManyToOne
-	@JoinColumn(name="league_id")
-	private League league;
 	
 	public Club() {
 		
@@ -141,6 +144,14 @@ public class Club {
 		this.manager_id = manager_id;
 	}
 
+	public Set<League> getLeagues() {
+		return leagues;
+	}
+
+	public void setLeagues(Set<League> leagues) {
+		this.leagues = leagues;
+	}
+	
 	@Override
 	public String toString() {
 		return "Club [id=" + id + ", name=" + name + ", country=" + country + ", location=" + location + ", leagues_in="

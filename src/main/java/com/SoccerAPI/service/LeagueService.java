@@ -1,5 +1,6 @@
 package com.SoccerAPI.service;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -12,6 +13,7 @@ import com.SoccerAPI.model.Club;
 import com.SoccerAPI.model.League;
 import com.SoccerAPI.repository.ClubRepository;
 import com.SoccerAPI.repository.LeagueRepository;
+import com.SoccerAPI.types.LeagueType;
 
 @Service
 public class LeagueService {
@@ -81,6 +83,15 @@ public class LeagueService {
 		} else {
 			return leagueRepo.findByCountry(str);
 		}
+	}
+	
+	public List<League> getLeaguesByType(String type) {
+		if (type.equalsIgnoreCase("LEAGUE")) {
+			return leagueRepo.findByType(LeagueType.LEAGUE);
+		} else if (type.equalsIgnoreCase("CUP")) {
+			return leagueRepo.findByType(LeagueType.CUP);
+		}
+		return Collections.emptyList();
 	}
 
 
