@@ -1,6 +1,7 @@
 package com.SoccerAPI.controller;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -31,7 +32,7 @@ public class ClubController {
 		return service.getAllClubs();
 	}
 	
-	@GetMapping("/clubs/{club_id}")
+	@GetMapping("/clubs/club/{club_id}")
 	public ResponseEntity<Object> getClubById(@PathVariable Long club_id) {
 		return service.getClubById(club_id);
 	}
@@ -49,6 +50,17 @@ public class ClubController {
 	@DeleteMapping("/clubs/{club_id}")
 	public void deleteLeague(@PathVariable Long club_id) {
 		service.deleteClub(club_id);
+	}
+	
+	
+	@GetMapping("/clubs/league/{league_id}")
+	public Set<Club> getAllClubsByLeagueId(@PathVariable Long league_id) {
+		return service.getAllClubsByLeagueId(league_id);
+	}
+	
+	@PostMapping("/clubs/{league_id}")
+	public void addClubByLeague(@RequestBody Club club, @PathVariable Long league_id) {
+		service.addClubByLeague(club, league_id);
 	}
 	
 	
