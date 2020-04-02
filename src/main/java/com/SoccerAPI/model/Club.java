@@ -7,15 +7,23 @@ import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.validation.GroupSequence;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+
+import com.SoccerAPI.types.Region;
 
 @Entity
 @Table(name = "clubs")
+@GroupSequence({ First.class, Second.class, Club.class})
 public class Club {
 
 	@Id
@@ -23,12 +31,28 @@ public class Club {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
+	@NotBlank(groups = First.class)
+	@Pattern(regexp = "^[\\S]+$", groups = Second.class)
 	private String name;
+	
+	@NotBlank(groups = First.class)
+	@Pattern(regexp = "^[\\S]+$", groups = Second.class)
 	private String country;
+	
+	@Enumerated(EnumType.STRING)
+	private Region region;
+	
+	@NotBlank(groups = First.class)
+	@Pattern(regexp = "^[\\S]+$", groups = Second.class)
 	private String location;
 	
-	@ElementCollection
-	private List<String> leagues_in;
+	@NotBlank(groups = First.class)
+	@Pattern(regexp = "^[\\S]+$", groups = Second.class)
+	private String stadium;
+	
+	@NotBlank(groups = First.class)
+	@Pattern(regexp = "^[\\S]+$", groups = Second.class)
+	private String managerName;
 	
 	@ElementCollection
 	private List<String> colors;
@@ -36,10 +60,6 @@ public class Club {
 	@ElementCollection
 	private List<String> honours;
 	
-	private String stadium;
-	
-	private String manager_name;
-	private String manager_id;
 	
 	@ManyToMany(mappedBy = "clubs", targetEntity = League.class, fetch = FetchType.LAZY)
 	private Set<League> leagues = new HashSet<>();
@@ -49,19 +69,18 @@ public class Club {
 		
 	}
 
-	public Club(Long id, String name, String country, String location, List<String> leagues_in, List<String> colors,
-			List<String> honours, String stadium, String manager_name, String manager_id) {
+	public Club(Long id, String name, String country, Region region, String location, List<String> colors,
+			List<String> honours, String stadium, String managerName) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.country = country;
+		this.region = region;
 		this.location = location;
-		this.leagues_in = leagues_in;
 		this.colors = colors;
 		this.honours = honours;
 		this.stadium = stadium;
-		this.manager_name = manager_name;
-		this.manager_id = manager_id;
+		this.managerName = managerName;
 	}
 
 	public Long getId() {
@@ -87,6 +106,15 @@ public class Club {
 	public void setCountry(String country) {
 		this.country = country;
 	}
+	
+	public Region getRegion() {
+		return region;
+	}
+
+	public void setRegion(Region region) {
+		this.region = region;
+	}
+
 
 	public String getLocation() {
 		return location;
@@ -94,14 +122,6 @@ public class Club {
 
 	public void setLocation(String location) {
 		this.location = location;
-	}
-
-	public List<String> getLeagues_in() {
-		return leagues_in;
-	}
-
-	public void setLeagues_in(List<String> leagues_in) {
-		this.leagues_in = leagues_in;
 	}
 
 	public List<String> getColors() {
@@ -128,21 +148,14 @@ public class Club {
 		this.stadium = stadium;
 	}
 
-	public String getManager_name() {
-		return manager_name;
+	public String getManagerName() {
+		return managerName;
 	}
 
-	public void setManager_name(String manager_name) {
-		this.manager_name = manager_name;
+	public void setManagerName(String manager_name) {
+		this.managerName = manager_name;
 	}
 
-	public String getManager_id() {
-		return manager_id;
-	}
-
-	public void setManager_id(String manager_id) {
-		this.manager_id = manager_id;
-	}
 
 	public Set<League> getLeagues() {
 		return leagues;
@@ -154,10 +167,11 @@ public class Club {
 	
 	@Override
 	public String toString() {
-		return "Club [id=" + id + ", name=" + name + ", country=" + country + ", location=" + location + ", leagues_in="
-				+ leagues_in + ", colors=" + colors + ", honours=" + honours + ", stadium=" + stadium
-				+ ", manager_name=" + manager_name + ", manager_id=" + manager_id;
+		return "Club [id=" + id + ", name=" + name + ", country=" + country + ", location=" + location 
+				 + ", colors=" + colors + ", honours=" + honours + ", stadium=" + stadium
+				+ ", manager name=" + managerName;
 	}
 		
 	
 }
+

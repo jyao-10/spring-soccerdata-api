@@ -70,7 +70,7 @@ public class LeagueService {
 		Optional<Club> optionalClub = clubRepo.findById(club_id);
 
 		if (optionalClub.isPresent()) {
-			return ResponseEntity.ok(optionalClub.get().getLeagues_in());
+			return ResponseEntity.ok(optionalClub.get().getLeagues());
 		} else {
 			throw new ResourceNotFoundException("Club id: " + club_id + " not found");
 		}
