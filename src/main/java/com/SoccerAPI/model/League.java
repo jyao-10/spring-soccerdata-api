@@ -16,11 +16,16 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.validation.GroupSequence;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 
 import com.SoccerAPI.types.LeagueType;
+import com.SoccerAPI.types.Region;
 
 @Entity
 @Table(name = "leagues")
+@GroupSequence({ First.class, Second.class, League.class})
 public class League {
 
 	@Id
@@ -28,16 +33,24 @@ public class League {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
+	@NotBlank(groups = First.class)
+	@Pattern(regexp = "^[\\S]+$", groups = Second.class)
 	private String name;
+	
+	@NotBlank(groups = First.class)
+	@Pattern(regexp = "^[\\S]+$", groups = Second.class)
 	private String country;
+	
+	@Enumerated(EnumType.STRING)
+	private Region region;
 	
 	@Enumerated(EnumType.STRING)
 	private LeagueType type;
 	
-	@ManyToMany(cascade = CascadeType.ALL)
+	@ManyToMany(cascade = CascadeType.MERGE)
 	@JoinTable(name="leagues_clubs",
-			joinColumns = @ JoinColumn(name="club_id"),
-			inverseJoinColumns = @JoinColumn(name="league_id"))
+			joinColumns = @ JoinColumn(name="league_id"),
+			inverseJoinColumns = @JoinColumn(name="club_id"))
 	private Set<Club> clubs = new HashSet<>();
 	
 	
@@ -45,11 +58,12 @@ public class League {
 	
 	}
 
-	public League(Long id, String name, String country, LeagueType type) {
+	public League(Long id, String name, String country, Region region, LeagueType type) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.country = country;
+		this.region = region;
 		this.type = type;
 	}
 
@@ -78,6 +92,14 @@ public class League {
 		this.country = country;
 	}
 	
+	public Region getRegion() {
+		return region;
+	}
+
+	public void setRegion(Region region) {
+		this.region = region;
+	}
+	
 	public LeagueType getType() {
 		return type;
 	}
@@ -102,3 +124,9 @@ public class League {
 	
 	
 }
+
+
+
+interface First {} 
+
+interface Second {} 

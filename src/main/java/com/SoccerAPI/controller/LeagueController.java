@@ -2,6 +2,8 @@ package com.SoccerAPI.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -39,12 +41,12 @@ public class LeagueController {
 
 	
 	@PostMapping("/leagues") 
-	public void addLeague(@RequestBody League league) {
+	public void addLeague(@Valid @RequestBody League league) {
 		service.addLeague(league);
 	}
 	
 	@PutMapping("/leagues/{league_id}")
-	public void updateLeague(@RequestBody League league, @PathVariable Long league_id) {
+	public void updateLeague(@Valid @RequestBody League league, @PathVariable Long league_id) {
 		service.updateLeague(league, league_id);
 	}
 	
