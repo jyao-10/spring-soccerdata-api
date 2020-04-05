@@ -45,12 +45,12 @@ public class ClubController {
 	}
 	
 	@PutMapping("/clubs/{club_id}")
-	public void updateLeague(@Valid @RequestBody Club club, @PathVariable Long club_id) {
+	public void updateClub(@Valid @RequestBody Club club, @PathVariable Long club_id) {
 		service.updateClub(club, club_id);
 	}
 	
 	@DeleteMapping("/clubs/{club_id}")
-	public void deleteLeague(@PathVariable Long club_id) {
+	public void deleteClub(@PathVariable Long club_id) {
 		service.deleteClub(club_id);
 	}
 	
@@ -60,11 +60,20 @@ public class ClubController {
 		return service.getAllClubsByLeagueId(league_id);
 	}
 	
-	@PostMapping("/clubs/{league_id}")
+	@PostMapping("/clubs/league/{league_id}")
 	public void addClubByLeague(@RequestBody Club club, @PathVariable Long league_id) {
-		service.addClubByLeague(club, league_id);
+		service.addNewClub_ByLeague(club, league_id);
 	}
 	
+	@PutMapping("/clubs/addLeague/{club_id}/{league_id}")
+	public void addLeagueToClub(@PathVariable Long club_id, @PathVariable Long league_id) {
+		service.addLeagueToClub(club_id, league_id);
+	}
+	
+	@PutMapping("/clubs/removeLeague/{club_id}/{league_id}")
+	public void removeLeagueFromClub(@PathVariable Long club_id, @PathVariable Long league_id) {
+		service.removeLeagueFromClub(club_id, league_id);
+	}
 	
 	
 }
