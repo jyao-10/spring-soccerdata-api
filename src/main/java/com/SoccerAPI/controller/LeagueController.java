@@ -70,5 +70,6 @@ public class LeagueController {
 	public List<League> getLeaguesByType(@PathVariable String league_type) {
 		return service.getLeaguesByType(league_type);
 	}
-
+	
+	
 }
