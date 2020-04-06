@@ -73,11 +73,8 @@ public class Club {
 			joinColumns = @ JoinColumn(name="club_id"),
 			inverseJoinColumns = @JoinColumn(name="player_id"))
 	private Set<Player> players = new HashSet<>();
-	
-	
-	public Club() {
-		
-	}
+
+	public Club() {}
 
 	public Club(Long id, String name, String country, Region region, String location, List<String> colors,
 			List<String> honours, String stadium, String managerName) {
@@ -173,6 +170,14 @@ public class Club {
 
 	public void setLeagues(Set<League> leagues) {
 		this.leagues = leagues;
+	}
+	
+	public Set<Player> getPlayers() {
+		return players;
+	}
+
+	public void setPlayers(Set<Player> players) {
+		this.players = players;
 	}
 	
 	@Override

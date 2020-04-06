@@ -44,6 +44,7 @@ public class Player {
 	@ManyToMany(mappedBy = "players", targetEntity = Club.class, fetch = FetchType.LAZY)
 	private Set<Club> clubs = new HashSet<>();
 
+	public Player() {}
 
 	public Player(Long id, String player_name, String firstName, String lastName, int age, String birthDate,
 			String birthPlace, String nationality, String height, String weight, int number, String position,

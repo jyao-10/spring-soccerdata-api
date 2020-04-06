@@ -54,9 +54,7 @@ public class League {
 	private Set<Club> clubs = new HashSet<>();
 	
 	
-	public League() {
-	
-	}
+	public League() {}
 
 	public League(Long id, String name, String country, Region region, LeagueType type) {
 		super();

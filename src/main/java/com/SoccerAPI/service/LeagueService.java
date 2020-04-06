@@ -29,10 +29,10 @@ public class LeagueService {
 	}
 
 	public ResponseEntity<Object> getLeagueById(Long id) {
-		Optional<League> optionalLeague = leagueRepo.findById(id);
+		Optional<League> league = leagueRepo.findById(id);
 
-		if (optionalLeague.isPresent()) {
-			return ResponseEntity.ok(optionalLeague.get());
+		if (league.isPresent()) {
+			return ResponseEntity.ok(league.get());
 		} else {
 			throw new ResourceNotFoundException("League id: " + id + " not found");
 		}
@@ -49,9 +49,9 @@ public class LeagueService {
 	}
 
 	public ResponseEntity<Object> updateLeague(League league, Long id) {
-		Optional<League> optionalLeague = leagueRepo.findById(id);
+		Optional<League> leagueToUpdate = leagueRepo.findById(id);
 
-		if (optionalLeague.isPresent()) {
+		if (leagueToUpdate.isPresent()) {
 			league.setId(id);
 			leagueRepo.save(league);
 			return ResponseEntity.ok(league);
@@ -62,15 +62,24 @@ public class LeagueService {
 	}
 
 	public void deleteLeague(Long id) {
+		Optional<League> leagueToDelete = leagueRepo.findById(id);
+		
+		if(leagueToDelete.isPresent()) {
+			for (Club c : leagueToDelete.get().getClubs()) {
+				c.getLeagues().remove(leagueToDelete.get());
+				clubRepo.save(c);
+			}
+		}
+
 		leagueRepo.deleteById(id);
 	}
 
 
 	public ResponseEntity<Object> getLeaguesByClub(Long club_id) {
-		Optional<Club> optionalClub = clubRepo.findById(club_id);
+		Optional<Club> club = clubRepo.findById(club_id);
 
-		if (optionalClub.isPresent()) {
-			return ResponseEntity.ok(optionalClub.get().getLeagues());
+		if (club.isPresent()) {
+			return ResponseEntity.ok(club.get().getLeagues());
 		} else {
 			throw new ResourceNotFoundException("Club id: " + club_id + " not found");
 		}
