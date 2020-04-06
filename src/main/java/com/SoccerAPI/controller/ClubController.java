@@ -65,12 +65,12 @@ public class ClubController {
 		service.addNewClub_ByLeague(club, league_id);
 	}
 	
-	@PutMapping("/clubs/addLeague/{club_id}/{league_id}")
+	@PutMapping("/clubs/addleague/{club_id}/{league_id}")
 	public void addLeagueToClub(@PathVariable Long club_id, @PathVariable Long league_id) {
 		service.addLeagueToClub(club_id, league_id);
 	}
 	
-	@PutMapping("/clubs/removeLeague/{club_id}/{league_id}")
+	@PutMapping("/clubs/removeleague/{club_id}/{league_id}")
 	public void removeLeagueFromClub(@PathVariable Long club_id, @PathVariable Long league_id) {
 		service.removeLeagueFromClub(club_id, league_id);
 	}

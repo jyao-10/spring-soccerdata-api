@@ -2,6 +2,7 @@ package com.SoccerAPI.service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -70,6 +71,78 @@ public class PlayerService {
 			playerRepo.deleteById(id);
 		}
 	}
+	
+	public Set<Player> getAllPlayersByClubId(Long id) {
+		Optional<Club> club = clubRepo.findById(id);
+
+		if (club.isPresent()) {
+			return club.get().getPlayers();
+		} else {
+			throw new ResourceNotFoundException("Club id: " + id + " not found");
+		}
+
+	}
+	
+	public void addPlayerByClub(Player player, Long club_id) {
+		boolean playerFound = playerRepo.findAll().stream().
+				anyMatch(p -> p.getId() == player.getId());
+
+		if (!playerFound) {
+			Optional<Club> club = clubRepo.findById(club_id);
+
+			if (club.isPresent()) {
+				Player p = playerRepo.save(player);
+
+				club.get().getPlayers().add(p);
+				clubRepo.save(club.get());
+			} else {
+				throw new ResourceNotFoundException("Club id: " + club_id + " not found");
+			}
+		}
+	}
+	
+	public void addClubToPlayer(Long player_id, Long club_id) {
+		Optional<Player> player = playerRepo.findById(player_id);
+
+		if (player.isPresent()) {
+			Optional<Club> club = clubRepo.findById(club_id);
+			
+			if (club.isPresent()) {
+				if (!player.get().getClubs().contains(club.get())) {
+					club.get().getPlayers().add(player.get());
+					playerRepo.save(player.get());
+					clubRepo.save(club.get());
+				}
+			} else {
+				throw new ResourceNotFoundException("Club id: " + club_id + " to add club not found");
+			}
+		} else {
+			throw new ResourceNotFoundException("Player id: " + player_id + " to add club not found");
+		}
+	}
+	
+	public void removePlayerFromClub(Long player_id, Long club_id) {
+		Optional<Player> player = playerRepo.findById(player_id);
+
+		if (player.isPresent()) {
+			Optional<Club> club = clubRepo.findById(club_id);
+			
+			if (club.isPresent()) {
+				if (player.get().getClubs().contains(club.get())) {
+					club.get().getPlayers().remove(player.get());
+					playerRepo.save(player.get());
+					clubRepo.save(club.get());
+				}
+			} else {
+				throw new ResourceNotFoundException("Club id: " + club_id + " to remove club not found");
+			}
+		} else {
+			throw new ResourceNotFoundException("Player id: " + player_id + " to remove club not found");
+		}
+	}
+	
+	
+	
 	
 	
 }

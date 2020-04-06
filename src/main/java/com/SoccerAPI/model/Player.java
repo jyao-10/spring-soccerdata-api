@@ -1,5 +1,6 @@
 package com.SoccerAPI.model;
 
+import java.beans.Transient;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -169,6 +170,7 @@ public class Player {
 		this.isInjured = isInjured;
 	}
 
+	@Transient
 	public Set<Club> getClubs() {
 		return clubs;
 	}

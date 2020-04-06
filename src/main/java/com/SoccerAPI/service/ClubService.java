@@ -80,7 +80,6 @@ public class ClubService {
 		} else {
 			throw new ResourceNotFoundException("League id: " + id + " not found");
 		}
-
 	}
 	
 	
@@ -135,10 +134,10 @@ public class ClubService {
 					leagueRepo.save(league.get());
 				} 
 			} else {
-				throw new ResourceNotFoundException("League id: " + league_id + " to add league not found");
+				throw new ResourceNotFoundException("League id: " + league_id + " to remove league league not found");
 			}
 		} else {
-			throw new ResourceNotFoundException("Club id: " + club_id + " to delete league not found");
+			throw new ResourceNotFoundException("Club id: " + club_id + " to remove league not found");
 		}
 	}
 
