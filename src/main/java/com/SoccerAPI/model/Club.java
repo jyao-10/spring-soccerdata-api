@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
@@ -13,6 +14,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.GroupSequence;
@@ -63,6 +66,13 @@ public class Club {
 	
 	@ManyToMany(mappedBy = "clubs", targetEntity = League.class, fetch = FetchType.LAZY)
 	private Set<League> leagues = new HashSet<>();
+	
+	
+	@ManyToMany(cascade = CascadeType.MERGE)
+	@JoinTable(name="clubs_players", 
+			joinColumns = @ JoinColumn(name="club_id"),
+			inverseJoinColumns = @JoinColumn(name="player_id"))
+	private Set<Player> players = new HashSet<>();
 	
 	
 	public Club() {

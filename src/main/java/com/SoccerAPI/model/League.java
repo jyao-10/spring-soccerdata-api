@@ -49,7 +49,7 @@ public class League {
 	
 	@ManyToMany(cascade = CascadeType.MERGE)
 	@JoinTable(name="leagues_clubs",
-			joinColumns = @ JoinColumn(name="league_id"),
+			joinColumns = @JoinColumn(name="league_id"),
 			inverseJoinColumns = @JoinColumn(name="club_id"))
 	private Set<Club> clubs = new HashSet<>();
 	
