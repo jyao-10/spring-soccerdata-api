@@ -48,7 +48,7 @@ public class ClubValidationTest {
 	
 	
 	@Test
-	public void testLeagueClub() {
+	public void testValidClub() {
 		Club club = getValidClub();
 		
 		Set<ConstraintViolation<Club>> violations = validator.validate(club);
@@ -58,7 +58,7 @@ public class ClubValidationTest {
 	}
 	
 	@Test
-	public void testInvalidName() {
+	public void testBlankName() {
 		Club club = getValidClub();
 		club.setName("");
 		
@@ -68,14 +68,12 @@ public class ClubValidationTest {
 		
 		ConstraintViolation<Club> violation = violations.iterator().next();
 		
-		
-		assertEquals("must not be blank", violation.getMessage());
 		assertEquals("name", violation.getPropertyPath().toString());
 		assertEquals("", violation.getInvalidValue());
 	}
 	
 	@Test
-	public void testInvalidCountry() {
+	public void testBlankCountry() {
 		Club club = getValidClub();
 		club.setCountry("");
 		
@@ -85,14 +83,12 @@ public class ClubValidationTest {
 		
 		ConstraintViolation<Club> violation = violations.iterator().next();
 		
-		
-		assertEquals("must not be blank", violation.getMessage());
 		assertEquals("country", violation.getPropertyPath().toString());
 		assertEquals("", violation.getInvalidValue());
 	}
 	
 	@Test
-	public void testInvalidLocation() {
+	public void testBlankLocation() {
 		Club club = getValidClub();
 		club.setLocation("");
 		
@@ -102,14 +98,12 @@ public class ClubValidationTest {
 		
 		ConstraintViolation<Club> violation = violations.iterator().next();
 		
-		
-		assertEquals("must not be blank", violation.getMessage());
 		assertEquals("location", violation.getPropertyPath().toString());
 		assertEquals("", violation.getInvalidValue());
 	}
 	
 	@Test
-	public void testInvalidStadium() {
+	public void testBlankStadium() {
 		Club club = getValidClub();
 		club.setStadium("");
 		
@@ -119,14 +113,12 @@ public class ClubValidationTest {
 		
 		ConstraintViolation<Club> violation = violations.iterator().next();
 		
-		
-		assertEquals("must not be blank", violation.getMessage());
 		assertEquals("stadium", violation.getPropertyPath().toString());
 		assertEquals("", violation.getInvalidValue());
 	}
 	
 	@Test
-	public void testInvalidManagerName() {
+	public void testBlankManagerName() {
 		Club club = getValidClub();
 		club.setManagerName("");
 		
@@ -136,8 +128,6 @@ public class ClubValidationTest {
 		
 		ConstraintViolation<Club> violation = violations.iterator().next();
 		
-		
-		assertEquals("must not be blank", violation.getMessage());
 		assertEquals("managerName", violation.getPropertyPath().toString());
 		assertEquals("", violation.getInvalidValue());
 	}

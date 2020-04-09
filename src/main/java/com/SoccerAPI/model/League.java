@@ -16,8 +16,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-import javax.validation.GroupSequence;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 
 import com.SoccerAPI.types.LeagueType;
@@ -25,7 +23,6 @@ import com.SoccerAPI.types.Region;
 
 @Entity
 @Table(name = "leagues")
-@GroupSequence({ First.class, Second.class, League.class})
 public class League {
 
 	@Id
@@ -33,12 +30,10 @@ public class League {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
-	@NotBlank(groups = First.class)
-	@Pattern(regexp = "^[\\S]+$", groups = Second.class)
+	@Pattern(regexp = "^[\\S]+$")
 	private String name;
 	
-	@NotBlank(groups = First.class)
-	@Pattern(regexp = "^[\\S]+$", groups = Second.class)
+	@Pattern(regexp = "^[\\S]+$")
 	private String country;
 	
 	@Enumerated(EnumType.STRING)
@@ -122,9 +117,3 @@ public class League {
 	
 	
 }
-
-
-
-interface First {} 
-
-interface Second {} 
