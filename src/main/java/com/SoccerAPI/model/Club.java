@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
@@ -13,6 +14,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.GroupSequence;
@@ -65,9 +68,13 @@ public class Club {
 	private Set<League> leagues = new HashSet<>();
 	
 	
-	public Club() {
-		
-	}
+	@ManyToMany(cascade = CascadeType.MERGE)
+	@JoinTable(name="clubs_players", 
+			joinColumns = @ JoinColumn(name="club_id"),
+			inverseJoinColumns = @JoinColumn(name="player_id"))
+	private Set<Player> players = new HashSet<>();
+
+	public Club() {}
 
 	public Club(Long id, String name, String country, Region region, String location, List<String> colors,
 			List<String> honours, String stadium, String managerName) {
@@ -163,6 +170,14 @@ public class Club {
 
 	public void setLeagues(Set<League> leagues) {
 		this.leagues = leagues;
+	}
+	
+	public Set<Player> getPlayers() {
+		return players;
+	}
+
+	public void setPlayers(Set<Player> players) {
+		this.players = players;
 	}
 	
 	@Override
