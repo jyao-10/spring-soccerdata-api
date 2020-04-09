@@ -22,7 +22,7 @@ public class Player {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
-	private String player_name;
+	private String playerName;
 	private String firstName;
 	private String lastName;
 	private int age;
@@ -52,7 +52,7 @@ public class Player {
 			boolean isInjured) {
 		super();
 		this.id = id;
-		this.player_name = player_name;
+		this.playerName = player_name;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.age = age;
@@ -74,12 +74,12 @@ public class Player {
 		this.id = id;
 	}
 
-	public String getPlayer_name() {
-		return player_name;
+	public String getPlayerName() {
+		return playerName;
 	}
 
-	public void setPlayer_name(String player_name) {
-		this.player_name = player_name;
+	public void setPlayerName(String player_name) {
+		this.playerName = player_name;
 	}
 
 	public String getFirstName() {
@@ -181,7 +181,7 @@ public class Player {
 	
 	@Override
 	public String toString() {
-		return "Player [id=" + id + ", player_name=" + player_name + ", firstName=" + firstName + ", lastName="
+		return "Player [id=" + id + ", player_name=" + playerName + ", firstName=" + firstName + ", lastName="
 				+ lastName + ", age=" + age + ", birthDate=" + birthDate + ", birthPlace=" + birthPlace
 				+ ", nationality=" + nationality + ", height=" + height + ", weight=" + weight + ", number=" + number
 				+ ", position=" + position + ", isInjured=" + isInjured + ", clubs=" + clubs + "]";

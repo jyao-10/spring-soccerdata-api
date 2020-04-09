@@ -71,5 +71,14 @@ public class PlayerController {
 		service.removePlayerFromClub(player_id, club_id);
 	}
 	
+	@GetMapping("/players/search/{player}")
+	public List<Player> searchByPlayer(@PathVariable String player) {
+		return service.searchByPlayer(player);
+	}
+	
+	@GetMapping("/players/search/club/{club}")
+	public Set<Player> getPlayersByClub(@PathVariable String club) {
+		return service.getPlayersByClub(club);
+	}
 	
 }

@@ -75,5 +75,4 @@ public class ClubController {
 		service.removeLeagueFromClub(club_id, league_id);
 	}
 	
-	
 }

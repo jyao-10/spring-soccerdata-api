@@ -1,5 +1,7 @@
 package com.SoccerAPI.service;
 
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -142,7 +144,33 @@ public class PlayerService {
 	}
 	
 	
+	public List<Player> searchByPlayer(String str) {
+		if (!playerRepo.findByPlayerName(str).isEmpty()) {
+			return playerRepo.findByPlayerName(str);
+		}
+		
+		if(!playerRepo.findByLastName(str).isEmpty()) {
+			return playerRepo.findByLastName(str);
+		}
+		
+		return Collections.emptyList();
+	}
 	
-	
+	public Set<Player> getPlayersByClub(String club_name) {
+		List<Club> clubs = clubRepo.findByName(club_name);
+		
+		Set<Player> players = new HashSet<>();
+		
+		if (!clubs.isEmpty()) {
+			for (Club c : clubs) {
+				players.addAll(c.getPlayers());
+			}
+		} else {
+			throw new ResourceNotFoundException("Club name: " + club_name 
+					+ " not found please try again or look at list of all clubs");
+		}
+		
+		return players;
+	}
 	
 }
