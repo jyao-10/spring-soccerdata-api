@@ -82,6 +82,10 @@ public class ClubService {
 		}
 	}
 	
+	public List<Club> searchClub(String name) {
+		return clubRepo.findByName(name);
+	}
+	
 	
 	public void addNewClub_ByLeague(Club club, Long league_id) {
 		boolean clubFound = clubRepo.findAll().stream().

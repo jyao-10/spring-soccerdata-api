@@ -54,7 +54,6 @@ public class ClubController {
 		service.deleteClub(club_id);
 	}
 	
-	
 	@GetMapping("/clubs/league/{league_id}")
 	public Set<Club> getAllClubsByLeagueId(@PathVariable Long league_id) {
 		return service.getAllClubsByLeagueId(league_id);
@@ -73,6 +72,11 @@ public class ClubController {
 	@PutMapping("/clubs/removeleague/{club_id}/{league_id}")
 	public void removeLeagueFromClub(@PathVariable Long club_id, @PathVariable Long league_id) {
 		service.removeLeagueFromClub(club_id, league_id);
+	}
+	
+	@GetMapping("/clubs/search/{name}")
+	public List<Club> searchClub(@PathVariable String name) {
+		return service.searchClub(name);
 	}
 	
 }
