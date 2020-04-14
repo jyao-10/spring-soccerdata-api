@@ -18,15 +18,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-import javax.validation.GroupSequence;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 
 import com.SoccerAPI.types.Region;
 
 @Entity
 @Table(name = "clubs")
-@GroupSequence({ First.class, Second.class, Club.class})
 public class Club {
 
 	@Id
@@ -34,27 +31,22 @@ public class Club {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
-	@NotBlank(groups = First.class)
-	@Pattern(regexp = "^[\\S]+$", groups = Second.class)
+	@Pattern(regexp = "^[\\S]+$")
 	private String name;
 	
-	@NotBlank(groups = First.class)
-	@Pattern(regexp = "^[\\S]+$", groups = Second.class)
+	@Pattern(regexp = "^[\\S]+$")
 	private String country;
 	
 	@Enumerated(EnumType.STRING)
 	private Region region;
 	
-	@NotBlank(groups = First.class)
-	@Pattern(regexp = "^[\\S]+$", groups = Second.class)
+	@Pattern(regexp = "^[\\S]+$")
 	private String location;
 	
-	@NotBlank(groups = First.class)
-	@Pattern(regexp = "^[\\S]+$", groups = Second.class)
+	@Pattern(regexp = "^[\\S]+$")
 	private String stadium;
 	
-	@NotBlank(groups = First.class)
-	@Pattern(regexp = "^[\\S]+$", groups = Second.class)
+	@Pattern(regexp = "^[\\S]+$")
 	private String managerName;
 	
 	@ElementCollection

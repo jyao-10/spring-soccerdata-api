@@ -61,9 +61,9 @@ public class LeagueController {
 		return service.getLeaguesByClub(club_id);
 	}
 	
-	@GetMapping("/leagues/search/{search_str}")
-	public List<League> getLeaguesBySearch(@PathVariable String search_str) { 
-		return service.getLeaguesBySearch(search_str);
+	@GetMapping("/leagues/search/{league}")
+	public List<League> getLeaguesBySearch(@PathVariable String league) { 
+		return service.getLeaguesBySearch(league);
 	}
 	
 	@GetMapping("/leagues/type/{league_type}")

@@ -61,11 +61,12 @@ public class LeagueValidationTest {
 		
 		Set<ConstraintViolation<League>> violations = validator.validate(league);
 		
+		assertEquals(violations.size(), 1);
+		
 		ConstraintViolation<League> violation = violations.iterator().next();
 		
 		assertEquals("name", violation.getPropertyPath().toString());
 		assertEquals("", violation.getInvalidValue());
-		assertEquals("must not be blank", violation.getMessage());
 
 	}
 	
@@ -77,11 +78,12 @@ public class LeagueValidationTest {
 		
 		Set<ConstraintViolation<League>> violations = validator.validate(league);
 		
+		assertEquals(violations.size(), 1);
+		
 		ConstraintViolation<League> violation = violations.iterator().next();
 		
 		assertEquals("country", violation.getPropertyPath().toString());
 		assertEquals("", violation.getInvalidValue());
-		assertEquals("must not be blank", violation.getMessage());
 		
 	}	
 	
