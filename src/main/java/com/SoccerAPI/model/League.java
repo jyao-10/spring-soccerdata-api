@@ -48,7 +48,7 @@ public class League {
 			inverseJoinColumns = @JoinColumn(name="club_id"))
 	private Set<Club> clubs = new HashSet<>();
 	
-	
+
 	public League() {}
 
 	public League(Long id, String name, String country, Region region, LeagueType type) {
@@ -59,7 +59,6 @@ public class League {
 		this.region = region;
 		this.type = type;
 	}
-
 
 	public Long getId() {
 		return id;
