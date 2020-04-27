@@ -18,6 +18,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.Pattern;
 
 import com.SoccerAPI.types.Region;
@@ -49,6 +50,9 @@ public class Club {
 	@Pattern(regexp = "^[\\S]+$")
 	private String managerName;
 	
+	@Min(value = 0, message = "points must be positive")
+	private int points;
+	
 	@ElementCollection
 	private List<String> colors;
 	
@@ -68,7 +72,7 @@ public class Club {
 
 	public Club() {}
 
-	public Club(Long id, String name, String country, Region region, String location, List<String> colors,
+	public Club(Long id, String name, String country, Region region, String location, int points, List<String> colors,
 			List<String> honours, String stadium, String managerName) {
 		super();
 		this.id = id;
@@ -76,6 +80,7 @@ public class Club {
 		this.country = country;
 		this.region = region;
 		this.location = location;
+		this.points = points;
 		this.colors = colors;
 		this.honours = honours;
 		this.stadium = stadium;
@@ -171,6 +176,15 @@ public class Club {
 	public void setPlayers(Set<Player> players) {
 		this.players = players;
 	}
+	
+	public int getPoints() {
+		return points;
+	}
+
+	public void setPoints(int points) {
+		this.points = points;
+	}
+
 	
 	@Override
 	public String toString() {

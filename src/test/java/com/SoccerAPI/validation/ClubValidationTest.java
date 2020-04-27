@@ -40,7 +40,7 @@ public class ClubValidationTest {
 		List<String> honours = new ArrayList<>();
 		honours.add("champions");
 		
-		Club validClub = new Club(1L, "validClubName", "validCountry", Region.NORTH_AMERICA, "validLocation", colors, honours, "validStadium", "validManagerName");
+		Club validClub = new Club(1L, "validClubName", "validCountry", Region.NORTH_AMERICA, "validLocation", 1, colors, honours, "validStadium", "validManagerName");
 		
 		return validClub;
 	}
