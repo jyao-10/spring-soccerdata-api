@@ -12,6 +12,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 
 @Entity
 @Table(name = "players")
@@ -22,22 +25,37 @@ public class Player {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
+	@Pattern(regexp = "^[\\S]+$")
 	private String playerName;
+	
+	@Pattern(regexp = "^[\\S]+$")
 	private String firstName;
+	
+	@Pattern(regexp = "^[\\S]+$")
 	private String lastName;
+	
+	@Min(value = 0L, message = "age must be greater than 0")
 	private int age;
+	
+	@NotBlank
 	private String birthDate;
 	
-
+	@NotBlank
 	private String birthPlace;
+	
+	@NotBlank
 	private String nationality;
 	
+	@NotBlank
 	private String height;
+	
+	@NotBlank
 	private String weight; 
 	
-	
+	@Min(value = 0, message = "number must be positive")
 	private int number;
 	
+	@NotBlank
 	private String position;
 	
 	private boolean isInjured;
